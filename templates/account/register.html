@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="login-wrapper d-flex align-items-center justify-content-center">
+        <div>
+            <div class="profile-page meterial-page col-lg-6 offset-lg-3 col-md-8 p-5 offset-md-2 m-t-50 m-b-50">
+                <form action="{% url 'account:register' %}" method="POST" class="login-form p-4">
+                    {% csrf_token %}
+                    <div class="login-form__header text-center mb-5">
+                        <h3>ثبت نام</h3>
+                    </div>
+                    <div class="login-input">
+                        <div class="text-center">
+                            {% if messages %}
+                                <ul class="messages">
+                                    {% for message in messages %}
+                                        <li style="color: darkred" class="{% if message.tags %}{{ message.tags }}{% endif %}">
+                                            {{ message }}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                        <input name="first_name" type="text" id="name" maxlength="30" placeholder="نام"
+                               class="login-input__field rounded-12">
+                        <input name="last_name" type="text" id="mail" maxlength="30" placeholder="نام خانوادگی"
+                               class="login-input__field rounded-12">
+                        <input name="phone_number" type="text" id="introductionPhone" maxlength="11"
+                               placeholder="شماره موبایل" class="login-input__field rounded-12">
+                        <input name="password" type="password" id="pass" maxlength="11" placeholder="رمز ورود"
+                               class="login-input__field rounded-12">
+                        <input name="confirm_password" type="password" id="rPass" maxlength="11"
+                               placeholder="تکرا رمز ورود"
+                               class="login-input__field rounded-12">
+                        <input type="button" class="login-confirm__btn rounded-12" value="تایید" onclick="submit()">
+                    </div>
+                    <label class="accept-label d-flex align-items-center">
+                        <p class="accept-text">حساب دارید ؟ <a href="{% url 'account:login' %}">ورود</a></p>
+                    </label>
+                </form>
+            </div>
+            <div class="return-link text-center mt-4">
+                <a style="color: #0b5ed7" href="{% url 'account:register-supervisor' %}">به عنوان مسئول سالن ورزشی ثبت نام کنید</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

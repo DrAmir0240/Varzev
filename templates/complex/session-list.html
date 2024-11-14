@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <section id="user-score">
+        <div class="container-lg">
+
+            <div class="bg-gray gray-shadow  ">
+
+                <div class="row my-5 mx-4 g-5 justify-content-around align-items-center">
+
+                    <!-- datepicker -->
+
+                    <div class="col-10 col-lg-4 text-center mb-3">
+                        <form id="dateForm" method="post">
+                            {% csrf_token %}
+                            <label class="" for="date">انتخاب تاریخ:</label>
+                            <input name="date"
+                                   class="border rounded-pill btn border-success border-4 form-control text-center"
+                                   type="text" id="date" data-jdp data-jdp-min-date="today"
+                                   data-jdp-max-date="1410/12/29" placeholder="برای انتخاب تاریخ کلیک کنید">
+                            <br><br>
+                            <button class="btn btn-success">ثبت تاریخ</button>
+                        </form>
+                    </div>
+
+                    <!-- datepicker end -->
+                    <div class="col-lg-6 text-center mt-4 ">
+                        <table class="table">
+                            <h4 class="p-2">سانس های تاریخ : {{ date }}</h4>
+                            <hr>
+                            {% if sessions %}
+
+                                <thead>
+                                <tr>
+                                    <th style="width: 20%;" class="text-right">ساعت</th>
+                                    <th style="width: 20%;" class="text-center">قیمت</th>
+                                    <th style="width: 20%;" class="text-left">وضعیت</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for session in sessions %}
+                                    <tr>
+                                        <td class="text-right">{{ session.time }}</td>
+                                        <td class="text-center">{{ session.session_price }}</td>
+                                        {% if user_is_supervisor %}
+                                            <td class="text-left text-success"><a class="text-warning"
+                                                                                      href="{% url 'edit_session' session.complex.category.slug session.complex.slug session.id %}">ویرایش</a>
+                                        {% else %}
+                                            {% if  not session.is_reserved and session.is_available %}
+                                                <td class="text-left text-success"><a class="text-success"
+                                                                                      href="{% url 'reserve' session.id %}">رزرو</a>
+                                                </td>
+                                            {% else %}
+                                                <td class="text-left text-danger disabled">رزرو شده</td>
+                                            {% endif %}
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            {% else %}
+                                <h3 class="text-danger">سانسی در این تاریخ موجود نیست</h3>
+                            {% endif %}
+
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}

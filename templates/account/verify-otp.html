@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <!--------login Section-------->
+    <div class=" d-flex align-items-center justify-content-center">
+        <div>
+            <br>
+            <br>
+            <div class="login-form">
+                <div class="login-form__header text-center mb-5">
+                    <h3>تایید شماره تلفن</h3>
+                </div>
+                <div class="login-input">
+                    <div class="text-center">
+                        {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                    <li style="color: darkred"
+                                        class="{% if message.tags %}{{ message.tags }}{% endif %}">
+                                        {{ message }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                    <form action="{% url 'account:verify_otp' %}" method="POST">
+                        {% csrf_token %}
+                        <input name="otp" type="text" id="phone" maxlength="6" placeholder="کد تایید را وارد کنید"
+                               class="login-input__field rounded-12">
+                        <input type="button" class="login-confirm__btn rounded-12" value="تایید" onclick="submit()">
+                    </form>
+                </div>
+            </div>
+            <div class="return-link text-center mt-4">
+                <a href="#">بازگشت -></a>
+            </div>
+        </div>
+    </div>
+    <!--------login Section-------->
+{% endblock %}

@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <br>
+    <br>
+    <!---Shop Filter Section-->
+    <section id="shop-filter">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-4">
+                    <div class="categories_part">
+
+                        <div class="categories_item" id="fade-content">
+                            <div class="search-filter rounded-8 d-flex align-items-center justify-content-between">
+                                <input type="text" class="search-input"
+                                       placeholder="جستجو..." name="keyword">
+                                <div class="search-icon">
+                                        <span>
+                                            <svg id="Iconly_Light_Search" data-name="Iconly/Light/Search"
+                                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                 viewBox="0 0 24 24">
+                                                <g id="Search" transform="translate(2 2)">
+                                                    <circle id="Ellipse_739" cx="8.989" cy="8.989" r="8.989"
+                                                            transform="translate(0.778 0.778)" fill="none"
+                                                            stroke="#c1c1c1"
+                                                            stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-miterlimit="10" stroke-width="1.5"></circle>
+
+                                                    <path id="Line_181" d="M0,0,3.524,3.515"
+                                                          transform="translate(16.018 16.485)" fill="none"
+                                                          stroke="#c1c1c1"
+                                                          stroke-linecap="round" stroke-linejoin="round"
+                                                          stroke-miterlimit="10"
+                                                          stroke-width="1.5"></path>
+                                                </g>
+                                            </svg>
+                                        </span>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div style="height: fit-content" class="dashboard_panel">
+                            <div class="user_dashboard dash">
+                                <h5 class="box text-center">دسته بندی مجموعه ها</h5>
+                                <ul class="user_menu">
+                                    <li class="active text-right">
+                                        <a href="{% url 'complexes-list' %}">
+                                            <svg width="38" height="38" viewBox="0 0 20 20">
+                                                <image width="20" height="20" opacity="0.923"
+                                                       href="{% static 'image/futsal.png' %}">
+                                            </svg>
+                                            همه
+                                        </a>
+                                    </li>
+                                    {% for category in links %}
+                                        <li class="text-right active">
+                                            <a href="{{ category.get_url }}" class="box">
+                                                <svg width="38" height="38" viewBox="0 0 20 20">
+                                                    {% if category.category_name == 'فوتبال' %}
+                                                        <image width="20" height="20" opacity="0.923"
+                                                               href="{% static 'image/football.png' %}"/>
+                                                        </svg>
+                                                    {% elif category.category_name == 'فوتسال' %}
+                                                        <image width="20" height="20" opacity="0.923"
+                                                               href="{% static 'image/football.png' %}"/>
+                                                        </svg>
+                                                    {% elif category.category_name == 'والیبال' %}
+                                                        <image width="20" height="20" opacity="0.923"
+                                                               href="{% static 'image/vollyball.png' %}"/>
+                                                        </svg>
+                                                    {% elif category.category_name == 'تنیس' %}
+                                                        <image width="20" height="20" opacity="0.923"
+                                                               href="{% static 'image/tennis.png' %}"/>
+                                                        </svg>
+                                                    {% elif category.category_name == 'استخر' %}
+                                                        <image width="20" height="20" opacity="0.923"
+                                                               href="{% static 'image/swim.png' %}"/>
+                                                        </svg>
+                                                    {% endif %}
+                                                {{ category.category_name }}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-9 col-md-8">
+
+                    <div class="filter_field d-flex align-items-center justify-content-between py-4 px-3 mb-4">
+
+                        <div class="product_count">
+                            <span>{{ complexes_count }} مجموعه یافت شد</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        {% if complexes %}
+                            {% for complex in complexes %}
+                                <div class="col-lg-4 col-sm-6">
+                                    <a href="{{ complex.get_url }}">
+                                        <div class="place-card place-shop d-flex flex-sm-column">
+                                            <div class="place-card__img">
+                                                <img src="{{ complex.complex_img.url }}" alt="">
+                                            </div>
+                                            <div class="place-card__content">
+                                                <h3>{{ complex.complex_name }}</h3>
+                                                <p class="grey-text">{{ complex.Address }}</p>
+                                                <div class="place-extra d-flex align-items-center justify-content-between mt-3">
+
+                                                    <div class="price green-text">
+                                                        <span>{{ complex.price }}</span>
+                                                        <span>هزار تومان</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <h2 class="text-center">مجموعه ای یافت نشد !</h2>
+                        {% endif %}
+                    </div>
+
+                    <div class="pagination_wrapper">
+                        <ul class="pagination">
+                            {% if complexes.has_previous %}
+                                <li>
+                                    <a href="?page={{ complexes.previous_page_number }}">
+                                        <svg id="Iconly_Light_Arrow_-_Right_2" data-name="Iconly/Light/Arrow - Right 2"
+                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24">
+                                            <g id="Arrow_-_Right_2" data-name="Arrow - Right 2"
+                                               transform="translate(8.5 19) rotate(-90)">
+                                                <path id="Stroke_1" data-name="Stroke 1" d="M14,0,7,7,0,0" fill="none"
+                                                      stroke="#200e32" stroke-linecap="round" stroke-linejoin="round"
+                                                      stroke-miterlimit="10" stroke-width="1.5"/>
+                                            </g>
+                                        </svg>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% for i in complexes.paginator.page_range %}
+                                {% if complexes.number == i %}
+                                    <li class="active">
+                                        <a href="#">{{ i }}</a>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        <a href="?page={{ i }}">{{ i }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if complexes.has_next %}
+                                <li>
+                                    <a href="?page={{ complexes.next_page_number }}">
+                                        <svg id="Iconly_Light_Arrow_-_Left_2" data-name="Iconly/Light/Arrow - Left 2"
+                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24">
+                                            <g id="Arrow_-_Left_2" data-name="Arrow - Left 2"
+                                               transform="translate(15.5 5) rotate(90)">
+                                                <path id="Stroke_1" data-name="Stroke 1" d="M14,0,7,7,0,0" fill="none"
+                                                      stroke="#200e32" stroke-linecap="round" stroke-linejoin="round"
+                                                      stroke-miterlimit="10" stroke-width="1.5"/>
+                                            </g>
+                                        </svg>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+    <!---End Shop Filter Section-->
+
+{% endblock %}

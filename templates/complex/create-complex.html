@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <br>
+    <br>
+    <section id="user-score">
+        <div class="container">
+            <div class="bg-gray gray-shadow rounded-8 mx-0 row">
+                <div class="py-4 px-5">
+                    <div>
+                        <form action="{% url 'create-complex' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="shop-title mb-4">
+                                <h3>اطلاعات مجموعه</h3>
+                            </div>
+                            <div class="row align-items-center justify-content-between pt-3">
+                                <div class="col-sm-6">
+                                    <div class="info-field">
+                                        <label for="">نام مجموعه</label>
+                                        <input name='complex_name' type="text" class="info-input">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="info-field">
+                                        <label for="">قیمت معمول هر سانس</label>
+                                        <input name='price'
+                                               placeholder="قیمت را به هزار تومان وارد کنید به طور مثال 250" type="text"
+                                               class="info-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row align-items-center justify-content-between">
+                                <div class="col-sm-4">
+                                    <div class="select2-dropdown info-field">
+                                        <label class="select2-dropdown">دسته بندی</label>
+                                        <div class="d-flex align-items-center">
+                                            <select style="width: 350px" name="category"
+                                                    class="see-all__btn d-flex align-items-center justify-content-center mt-"
+                                                    required>
+                                                {% for category in categories %}
+                                                    <option value="{{ category.category_name }}">{{ category.category_name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="d-flex align-items-center ">
+                                        <label class="float-right">آیا قیمت سانس ها متغیر است؟
+                                            <select style="width: 350px" name="price_variation"
+                                                    class="see-all__btn d-flex align-items-center justify-content-center mt-"
+                                                    required>
+                                                <option value="0">خیر</option>
+                                                <option value="1">بله</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center pb-3 my-3">
+                                <div class="col-12">
+                                    <div class="upload-field d-flex flex-wrap align-items-center justify-content-center justify-content-sm-between position-relative p-4">
+                                        <input type="file" name="complex_img" class="upload-input">
+                                        <div class="d-flex align-items-center me-4">
+                                            <div class="upload-text">
+                                                <h4>عکس پروفایل خود را وارد کنید</h4>
+                                                <p>حداکثر 5 مگابایت باشد.</p>
+                                            </div>
+                                        </div>
+                                        <div class="btn btn-add rounded-8 mt-3 mt-sm-0 line-h-1">
+                                            اضافه شود
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row align-items-center justify-content-between">
+                                <div class="col-sm-6">
+                                    <div class="info-field">
+                                        <label for="">مساحت</label>
+                                        <div class="d-flex align-items-center">
+                                            <input name='area' type="number"
+                                                   class="info-input text-right">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="info-field">
+                                        <label for="">تعداد نگهبان</label>
+                                        <div class="d-flex align-items-center">
+                                            <input name='guards_count' type="number"
+                                                   class="info-input text-right">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="info-field">
+                                        <label for="">توضیحات مجموعه</label>
+                                        <div class="d-flex align-items-center">
+                                            <input name='complex_description' type="text"
+                                                   class="info-input text-right">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="shop-title mb-4">
+                                <h3>اطلاعات سانس ها</h3>
+                            </div>
+                            <div class="row align-items-center justify-content-between">
+                                <div class="col-sm-6">
+                                    <div class="info-field">
+                                        <label for="">شروع ساعت کاری</label>
+                                        <div class="d-flex align-items-center">
+                                            <input name='start_time' type="time"
+                                                   class="info-input text-right">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="info-field">
+                                        <label for="">پایان ساعت کاری</label>
+                                        <div class="d-flex align-items-center">
+                                            <input name='end_time' type="time" class="info-input text-right">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row align-items-center justify-content-between">
+                                <div class="col-sm-6">
+                                    <div class="info-field">
+                                        <label for="">مدت زمان هر سانس</label>
+                                        <div class="d-flex align-items-center ">
+                                            <select style="width: 350px" name="session_long"
+                                                    class="see-all__btn d-flex align-items-center justify-content-center mt-"
+                                                    required>
+                                                <option value="60">۶۰ دقیقه</option>
+                                                <option value="90">۹۰ دقیقه</option>
+                                                <option value="120">۱۲۰ دقیقه</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="info-field">
+                                        <label for="">روز های تعطیل</label>
+                                        <div class="d-flex align-items-center">
+                                            <input name='close_days' type="text"
+                                                   class="info-input text-right">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="shop-title mb-4">
+                                <h3>مکان</h3>
+                            </div>
+                            <div class="row align-items-center justify-content-between">
+                                <div class="col-sm-6">
+                                    <div class="info-field">
+                                        <label for="">شهر</label>
+                                        <div class="d-flex align-items-center">
+                                            <input name='city' type="text" class="info-input text-right">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="info-field">
+                                        <label for="">منطقه یا محله</label>
+                                        <div class="d-flex align-items-center">
+                                            <input name='zone' type="text" class="info-input text-right">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row align-items-center justify-content-between">
+                                <div class="col-sm-6">
+                                    <div class="info-field">
+                                        <label for="">آدرس</label>
+                                        <div class="d-flex align-items-center">
+                                            <input name='Address' type="text" class="info-input text-right">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn-dark float-end line-h-1 rounded-8">
+                                    ثبت
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+{% endblock %}

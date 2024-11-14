@@ -1,0 +1,43 @@
+@font-face{
+    font-family: sansBold;
+    src: url("../font/Sans/IRANSansWeb(FaNum)_Bold.ttf");
+}
+@font-face{
+    font-family: sansBlack;
+    src: url("../font/Sans/IRANSansWeb(FaNum)_Black.ttf");
+}
+@font-face{
+    font-family: sansLight;
+    src: url("../font/Sans/IRANSansWeb(FaNum)_Light.ttf");
+}
+@font-face{
+    font-family: sansMedium;
+    src: url("../font/Sans/IRANSansWeb(FaNum)_Medium.ttf");
+}
+@font-face{
+    font-family: sansUltraLight;
+    src: url("../font/Sans/IRANSansWeb(FaNum)_UltraLight.ttf");
+}
+@font-face{
+    font-family: sans;
+    src: url("../font/Sans/IRANSansWeb(FaNum).ttf");
+}
+.SansBold{
+    font-family: sansBold!important;
+}
+.SansBlack{
+    font-family: sansBlack!important;
+}
+.SansLight{
+    font-family: sansLight!important;
+}
+.SansMedium{
+    font-family: sansMedium!important;
+}
+
+.Sans{
+    font-family: sans!important;
+}
+.SansUltraLight{
+    font-family: sansUltraLight!important;
+}

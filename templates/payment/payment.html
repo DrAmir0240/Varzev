@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-----Reserve place Section----->
+<section id="reserve-place" class="section">
+    <div class="container">
+        <div class="bg-gray gray-shadow rounded-8 mx-0 mx-md-5">
+            <div class="py-4 px-5">
+                <div class="p-4 bg-dark-900 rounded-8">
+                    <img style="width: 70px;height: 70px; float: left;margin-bottom: 15px;" src="{{ complex.complex_img.url }}"
+                         alt="">
+                    <div class="title">
+                        <h2 class=" bg-transparent">{{ complex.complex_name }}</h2>
+                    </div>
+                </div>
+
+                <div class="mt-5">
+                    <div class="option-item buy-info d-flex align-items-center justify-content-between">
+                        <div>
+                            <h5>نوع مکان</h5>
+                        </div>
+                        <div>
+                            <h5 class="text-dark">{{ complex.category }}</h5>
+                        </div>
+                    </div>
+                    <div class="option-item buy-info d-flex align-items-center justify-content-between">
+                        <div>
+                            <h5 class="me-4">ادرس</h5>
+                        </div>
+                        <div>
+                            <h5 class="text-dark">{{ complex.Address }}</h5>
+                        </div>
+                    </div>
+                    <div class="option-item buy-info d-flex align-items-center justify-content-between">
+                        <div>
+                            <h5 class="me-4">زمان</h5>
+                        </div>
+                        <div>
+                            <h5 class="text-dark">{{ session.time }}</h5>
+                        </div>
+                    </div>
+                    <div class="option-item buy-info d-flex align-items-center justify-content-between">
+                        <div>
+                            <h5>مدت سانس</h5>
+                        </div>
+                        <div>
+                            <h5 class="text-dark">{{ complex.session_long }} دقیقه</h5>
+                        </div>
+                    </div>
+                    <div class="option-item buy-info d-flex align-items-center justify-content-between">
+                        <div>
+                            <h5 class="me-4">تاریخ</h5>
+                        </div>
+                        <div>
+                            <h5 class="text-dark">{{ session.time }}</h5>
+                        </div>
+                    </div>
+                    <div class="option-item buy-info d-flex align-items-center justify-content-between">
+                        <div>
+                            <h5 class="me-4">مساحت</h5>
+                        </div>
+                        <div>
+                            <h5 class="text-dark">{{ complex.area }}</h5>
+                        </div>
+                    </div>
+                    <div class="option-item buy-info d-flex align-items-center justify-content-between">
+                        <div>
+                            <h5 class="me-4">توضیحات</h5>
+                        </div>
+                        <div>
+                            <h5 class="text-dark">{{ reserve.reserve_note }}</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-5">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between">
+                        <div class="total-price d-flex mt-4 mt-sm-0">
+                            <span> مبلغ : &nbsp;</span>
+                            <h5 class="green-text mb-0">{{ reserve.session.session_price }} هزار تومان</h5>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-wrap align-items-center justify-content-between">
+                        <div class="info-field d-flex align-items-center mt-4">
+                            <div class="d-flex align-items-center">
+                            </div>
+                        </div>
+
+                        <div class="btn pay-btn line-h-1 rounded-8">
+                            <a href="{% url 'request' reserve.id %}" class="text-white">پرداخت</a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-----End Reserve place Section----->
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+    <section class="section">
+        <div class="container desktop-banner">
+            <img style="border: 5px solid green;" class="desktop-banner" src="{% static 'image/Varzev-banner.png' %}" alt="ورزو">
+        </div>
+        <div class="container mobile-banner">
+            <img src="{% static 'image/Varzev-banner- 2.jpg' %}" alt="ورزو">
+        </div>
+    </section>
+
+    <!-------Like Place------>
+    <section id="like-place" class="overflow-hidden section">
+        <div class="container">
+            <div class="d-flex">
+                <div class="title no-br">
+                    <h2 class="line-h-1">جدیدترین ها</h2>
+                </div>
+            </div>
+
+            <div class="row hide-row">
+                <div class="col-12">
+                    <div class="suggest-wrapper">
+                        <div class="swiper suggest-swiper mt-4">
+                            <div class="swiper-wrapper">
+                                {% for complex in complexes %}
+                                    <div class="swiper-slide">
+                                        <div class="place-card place-shop">
+                                            <div class="place-card__img simple-img">
+                                                <a href="{{ complex.get_url }}">
+                                                    <img src="{{ complex.complex_img.url }}" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="place-card__content w-100">
+                                                <h3><a href="{{ complex.get_url }}">{{ complex.complex_name }}</a></h3>
+                                                <p class="grey-text">{{ complex.Address }}</p>
+                                                <div class="place-extra d-flex align-items-center justify-content-between mt-3">
+                                                    <div class="price green-text">
+                                                        <span> قیمت معمول:</span>
+                                                        <span>{{ complex.price }}</span>
+                                                        <span>هزار تومان</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-------End Like Place------>
+
+    <!------Description Section------>
+    <section id="description" class="section">
+        <div class="container">
+
+            <div style="background-image: url(static/image/sandro-schuh-HgwY_YQ1m0w-unsplash@2x.jpg);background-repeat: no-repeat;background-size: cover"
+                 class="bg-white rounded-12 p-4">
+                <div class="description-content">
+
+                    <h1 style=" text-align: center; font-size: 200px;">لیگ </h1>
+                    <h2 style=" text-align: center; font-size: 50px;color: white;" class="grey-text">بزودی ...</h2>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--------End Description Section---------->
+
+    <!------... Section------>
+    <section class="section">
+        <div class="container">
+            <div style="background-image: url(static/image/shop3.jpg);background-repeat: no-repeat;background-size: cover;"
+                 class="bg-white rounded-12 p-4">
+                <div class="description-content">
+                    <h1 style=" text-align: center; font-size: 200px;">دکه</h1>
+                    <h2 style=" text-align: center; font-size: 50px;color: white;" class="grey-text">بزودی ...</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--------End ... Section---------->
+{% endblock %}

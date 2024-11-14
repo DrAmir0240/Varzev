@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+    <!-------Ticket Section------->
+    <section id="ticket" class="py-5 mb-5">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between">
+                <div>
+                    <h2>فرم رزرو</h2>
+                </div>
+            </div>
+        </div>
+        <br>
+        <form action="{% url 'reserve' session.id %}" method="POST">
+            {% csrf_token %}
+            <div class="container">
+                <div class="bg-white gray-shadow rounded-12 py-4">
+                    <div class="view-box__container">
+                        <div class="mx-4">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="ticket-input rounded-8 form-control mt-4">
+                                        <input name="first_name" type="text" placeholder="نام" class="text-right"
+                                               required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="ticket-input form-control rounded-8 mt-4">
+                                        <input name="last_name" type="text" placeholder="نام خانوادگی" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="ticket-input form-control rounded-8">
+                                <input name="phone" type="text" placeholder="شماره تلفن" required>
+                            </div>
+                            <div class="rounded-8 mt-4">
+                            <textarea name="reserve_note" class="ticket-text ticket-input rounded-8"
+                                      placeholder="چند کلمه توضیح ذکر کنید به طور مثال آیا توپ دارید یا درخواست توپ از مسئول سال را دارید"
+                                      required></textarea>
+                            </div>
+
+                            <div class="mt-5 text-center d-flex align-items-center justify-content-center">
+
+                                <div>
+                                    <button class="btn btn-success" type="submit" onclick="return confirmAction(event)">
+                                        تایید برای رزرو
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+    <!-------End Ticket Section------->
+{% endblock %}

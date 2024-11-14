@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <br>
+    <br>
+    <section id="user-score">
+        <div class="container">
+            <div class="bg-gray gray-shadow rounded-8 mx-0 row">
+                <div class="py-4 px-5">
+                    <div>
+                        <form action="{% url 'account:register-supervisor' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="shop-title mb-4">
+                                <h3>اطلاعات شخصی</h3>
+                            </div>
+                            <div class="row align-items-center justify-content-between pt-3">
+                                <div class="col-sm-6">
+                                    <div class="info-field">
+                                        <label for="">نام</label>
+                                        <input name='first_name' type="text" class="info-input">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="info-field">
+                                        <label for="">نام خانوادگی</label>
+                                        <input name='last_name' type="text" class="info-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row align-items-center justify-content-between">
+                                <div class="col-sm-6">
+                                    <div class="info-field">
+                                        <label for="">کد ملی</label>
+                                        <div class="d-flex align-items-center">
+                                            <input name='national_code' type="text"
+                                                   class="info-input text-right">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="info-field">
+                                        <label for="">تاریخ تولد</label>
+                                        <div class="d-flex align-items-center">
+                                            <input name='birth_date' type="text" placeholder="1360-01-01"
+                                                   class="info-input text-right">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="shop-title mb-4">
+                                <h3>اطلاعات حساب کاربری</h3>
+                            </div>
+                            <div class="row align-items-center justify-content-between">
+                                <div class="col-sm-6">
+                                    <div class="info-field">
+                                        <label for="">ایمیل</label>
+                                        <div class="d-flex align-items-center">
+                                            <input name='email' type="tel"
+                                                   class="info-input text-right">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="info-field">
+                                        <label for="">شماره تلفن</label>
+                                        <div class="d-flex align-items-center">
+                                            <input name='phone_number' type="tel" class="info-input text-right">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row align-items-center justify-content-between">
+                                <div class="col-sm-6">
+                                    <div class="info-field">
+                                        <label for="">رمز عبور</label>
+                                        <div class="d-flex align-items-center">
+                                            <input name='password' type="password"
+                                                   class="info-input text-right">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="info-field">
+                                        <label for="">تایید رمز عبور</label>
+                                        <div class="d-flex align-items-center">
+                                            <input name='confirm_password' type="password"
+                                                   class="info-input text-right">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="shop-title mb-4">
+                                <h3>اطلاعات اولیه مجموعه</h3>
+                            </div>
+                            <div class="row align-items-center justify-content-between">
+                                <div class="col-sm-6">
+                                    <div class="info-field">
+                                        <label for="">شهر</label>
+                                        <div class="d-flex align-items-center">
+                                            <input name='city' type="text" class="info-input text-right">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="info-field">
+                                        <label for="">منطقه یا محله</label>
+                                        <div class="d-flex align-items-center">
+                                            <input name='zone' type="text" class="info-input text-right">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row align-items-center justify-content-between">
+                                <div class="col-sm-12">
+                                    <div class="info-field">
+                                        <label for="">تاریخ تحویل</label>
+                                        <div class="d-flex align-items-center">
+                                            <input name='delivery_date' placeholder="1401-02-06" type="text"
+                                                   class="info-input text-right">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="shop-title mb-4">
+                                <h3>اطلاعات تسویه حساب</h3>
+                            </div>
+                            <div class="row align-items-center justify-content-between">
+                                <div class="col-sm-6">
+                                    <div class="info-field">
+                                        <label for="">شماره شبا</label>
+                                        <div class="d-flex align-items-center">
+                                            <input name='sheba_number' type="text" value="-IR"
+                                                   class="info-input text-left">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="info-field">
+                                        <label for="">نام صاحب حساب</label>
+                                        <div class="d-flex align-items-center">
+                                            <input name='sheba_name' type="text" class="info-input text-right">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row align-items-center justify-content-between">
+                                <div class="col-sm-4">
+                                    <div class="select2-dropdown info-field">
+                                        <label class="select2-dropdown">نوع تسویه</label>
+                                        <div class="d-flex align-items-center ">
+                                            <select style="width: 350px" name="income_settlement"
+                                                    class="see-all__btn d-flex align-items-center justify-content-center mt-"
+                                                    required>
+                                                <option value="1">روزانه</option>
+                                                <option value="2">هفتگی</option>
+                                                <option value="3">15 روزه</option>
+                                                <option value="4">ماهانه</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn-dark float-end line-h-1 rounded-8">
+                                    ثبت
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+{% endblock %}
