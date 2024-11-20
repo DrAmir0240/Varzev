@@ -95,6 +95,12 @@ def create_complex(request):
         return render(request, 'complex/create-complex.html', {'categories': categories})
 
 
+# def complex_edit(request, complex_slug):
+#     complecs = get_object_or_404(Complex, slug=complex_slug)
+#     user = get_object_or_404(User, pk=request.user.pk)
+#     return render(request, 'complex/edit-complex.html', {'complex': complecs})
+
+
 def session_list(request, category_slug, complex_slug):
     date = jdatetime.date.today()
     print(date)

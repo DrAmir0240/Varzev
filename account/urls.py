@@ -8,6 +8,7 @@ urlpatterns = [
     path('register-supervisor/', views.SuperVisorRegister.as_view(), name='register-supervisor'),
     path('login/', views.Login.as_view(), name='login'),
     path('logout/', views.Logout.as_view(), name='logout'),
+    path('update-supervisor-info/<str:phone>/',views.SuperVisorRegisterUpdate.as_view(), name='update-supervisor'),
     path('verify-otp/', views.VerifyOTPView.as_view(), name='verify_otp'),
     path('<str:phone>/supervisor-dashboard/', views.supervisor_dashboard, name='supervisor-dashboard'),
     path('<str:phone>/dashboard/', views.dashboard, name='dashboard'),

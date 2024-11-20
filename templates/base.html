@@ -28,6 +28,7 @@
         .custom-btn {
             margin: 5px; /* فاصله بین دکمه‌ها */
         }
+
         .image-container {
             display: flex;
             justify-content: center; /* مرکز عمودی */
@@ -375,156 +376,165 @@
     </header>
 </div>
 <!--------End Header Section-------->
-
-{% block content %}
-{% endblock %}
-
-
-<!----Footer--->
-
-<footer class="bg-white">
-    <div class="container">
-        <div class="row pt-4">
-            <div class="col-lg-6">
-                <div class="left-footer">
-                    <div class="logo">
-                        <img src="{% static 'image/logo-varzev.png' %}" alt="varzav">
-                    </div>
-                    <img style="display: block;max-width: 20%;height: auto;margin: 0 auto;"
-                         src="{% static 'image/logo-varzev-r.png' %}" alt="varzev">
-                    <div class="email-field">
-                        <p>با ثبت ایمیل از جدیدترین تخفیف ها با خبر شوید</p>
-                        <form action="#" class="email-form">
-                            <input type="text" class="email-input rounded-8" placeholder="ایمیل خود را وارد کنید">
-                            <button type="submit" class="btn send-btn rounded-8">ارسال</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 text-center text-lg-start">
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <div>
-                    <p style="text-align: center;display: block;max-width: 100%;height: auto;margin: 0 auto; "
-                       class="grey-text">ما قسم خورده ایم تا از تمامی استعدادهای کشورمان استفاده کنیم و کشوری قوی
-                        انسان های سالم تحویل جامعه بدهیم تا از دست در کنار یکدیگر بسازیم. </p>
-                </div>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <div class="d-flex justify-content-center justify-content-lg-end mt-3" style="text-align: left">
-                    <div class="namad-image">
-                        <img src="{% static 'image/logo (2).svg' %}" alt="">
-                    </div>
-                    <div class="namad-image">
-                        <img src="{% static 'image/logo.svg' %}" alt="">
-                    </div>
-                    <div class="namad-image">
-                        <img src="{% static 'image/logo (1).svg' %}" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="copyright text-center py-4">
-            <p class="grey-text mb-0">تمامی حقوق این سایت متعلق به ورزو میباشد.</p>
+<div class="container">
+    <div class="row">
+        {% if messages %}
+            <div class="col-sm text-right mt-4 ">
+            {% for m in messages %}
+                <div class="alert alert-{{ m.tags }} ">{{ m.message }}</div>
+            {% endfor %}
+        {% endif %}
         </div>
     </div>
-</footer>
+    {% block content %}
+    {% endblock %}
 
-<!-------End Footer------>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-<script src="{% static 'js/bootstrap.bundle.js' %}" defer></script>
-<script src="{% static 'js/main.js' %}" defer></script>
-<script src="{% static 'js/swiper.bundle.js' %}"></script>
-<script src="{% static 'js/bootstrap.bundle.js' %}"></script>
-<script src="{% static 'js/slider.js' %}"></script>
-<script src="{% static 'js/main.js' %}"></script>
-<script src="{% static 'js/user-panel.js' %}"></script>
-<script src="{% static 'js/comment-pop.js' %}"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!----Footer--->
 
-<script type="text/javascript" src="{% static 'jalalidatepicker/dist/jalalidatepicker.min.js' %}"></script>
+    <footer class="bg-white">
+        <div class="container">
+            <div class="row pt-4">
+                <div class="col-lg-6">
+                    <div class="left-footer">
+                        <div class="logo">
+                            <img src="{% static 'image/logo-varzev.png' %}" alt="varzav">
+                        </div>
+                        <img style="display: block;max-width: 20%;height: auto;margin: 0 auto;"
+                             src="{% static 'image/logo-varzev-r.png' %}" alt="varzev">
+                        <div class="email-field">
+                            <p>با ثبت ایمیل از جدیدترین تخفیف ها با خبر شوید</p>
+                            <form action="#" class="email-form">
+                                <input type="text" class="email-input rounded-8" placeholder="ایمیل خود را وارد کنید">
+                                <button type="submit" class="btn send-btn rounded-8">ارسال</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center text-lg-start">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <div>
+                        <p style="text-align: center;display: block;max-width: 100%;height: auto;margin: 0 auto; "
+                           class="grey-text">ما قسم خورده ایم تا از تمامی استعدادهای کشورمان استفاده کنیم و کشوری قوی
+                            انسان های سالم تحویل جامعه بدهیم تا از دست در کنار یکدیگر بسازیم. </p>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="d-flex justify-content-center justify-content-lg-end mt-3" style="text-align: left">
+                        <div class="namad-image">
+                            <img src="{% static 'image/logo (2).svg' %}" alt="">
+                        </div>
+                        <div class="namad-image">
+                            <img src="{% static 'image/logo.svg' %}" alt="">
+                        </div>
+                        <div class="namad-image">
+                            <img src="{% static 'image/logo (1).svg' %}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-<script>
-    $(document).ready(function () {
-        $('.menu-item').on('click', function (e) {
-            e.preventDefault();
+            <div class="copyright text-center py-4">
+                <p class="grey-text mb-0">تمامی حقوق این سایت متعلق به ورزو میباشد.</p>
+            </div>
+        </div>
+    </footer>
 
-            // سکشن‌های دیگر را مخفی کن
-            $('.content-section').removeClass('active');
+    <!-------End Footer------>
 
-            // سکشن مرتبط با گزینه انتخاب شده را نمایش بده
-            var target = $(this).data('target');
-            $('#' + target).addClass('active');
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="{% static 'js/bootstrap.bundle.js' %}" defer></script>
+    <script src="{% static 'js/main.js' %}" defer></script>
+    <script src="{% static 'js/swiper.bundle.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+    <script src="{% static 'js/slider.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/user-panel.js' %}"></script>
+    <script src="{% static 'js/comment-pop.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="{% static 'jalalidatepicker/dist/jalalidatepicker.min.js' %}"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.menu-item').on('click', function (e) {
+                e.preventDefault();
+
+                // سکشن‌های دیگر را مخفی کن
+                $('.content-section').removeClass('active');
+
+                // سکشن مرتبط با گزینه انتخاب شده را نمایش بده
+                var target = $(this).data('target');
+                $('#' + target).addClass('active');
+            });
         });
-    });
 
 
-    $(document).ready(function () {
-        // فعال‌سازی Jalali Datepicker
-        jalaliDatepicker.startWatch({
-            minDate: "attr",
-            maxDate: "attr"
+        $(document).ready(function () {
+            // فعال‌سازی Jalali Datepicker
+            jalaliDatepicker.startWatch({
+                minDate: "attr",
+                maxDate: "attr"
+            });
+
         });
+        /* Below is a js demo | you don't need to use */
+        setTimeout(function () {
+            let elm = document.getElementById("date")[0];
+            elm.focus();
+            jalaliDatepicker.hide();
+            jalaliDatepicker.show(elm);
+        }, 1000);
 
-    });
-    /* Below is a js demo | you don't need to use */
-    setTimeout(function () {
-        let elm = document.getElementById("date")[0];
-        elm.focus();
-        jalaliDatepicker.hide();
-        jalaliDatepicker.show(elm);
-    }, 1000);
+        function toggleContent(contentId) {
+            const content = document.getElementById(contentId);
+            const title = content.previousElementSibling;
 
-    function toggleContent(contentId) {
-        const content = document.getElementById(contentId);
-        const title = content.previousElementSibling;
-
-        // بررسی کنید که آیا محتوای انتخاب شده در حال نمایش است یا خیر
-        if (content.style.maxHeight) {
-            // اگر در حال نمایش است، آن را پنهان کنید
-            content.style.maxHeight = null;
-            title.classList.remove('active');
-        } else {
-            // ابتدا همه محتواها را پنهان کنید
-            const contents = document.querySelectorAll('.content');
-            const titles = document.querySelectorAll('.title');
-            contents.forEach(function (content) {
+            // بررسی کنید که آیا محتوای انتخاب شده در حال نمایش است یا خیر
+            if (content.style.maxHeight) {
+                // اگر در حال نمایش است، آن را پنهان کنید
                 content.style.maxHeight = null;
-            });
-            titles.forEach(function (title) {
                 title.classList.remove('active');
-            });
+            } else {
+                // ابتدا همه محتواها را پنهان کنید
+                const contents = document.querySelectorAll('.content');
+                const titles = document.querySelectorAll('.title');
+                contents.forEach(function (content) {
+                    content.style.maxHeight = null;
+                });
+                titles.forEach(function (title) {
+                    title.classList.remove('active');
+                });
 
-            // سپس محتوای انتخاب شده را نمایش دهید
-            content.style.maxHeight = content.scrollHeight + "px";
-            title.classList.add('activate');
+                // سپس محتوای انتخاب شده را نمایش دهید
+                content.style.maxHeight = content.scrollHeight + "px";
+                title.classList.add('activate');
+            }
         }
-    }
 
-    function confirmAction(event) {
-        // پیغام تایید برای کاربر
-        const confirmation = confirm("Are you sure you want to proceed?");
+        function confirmAction(event) {
+            // پیغام تایید برای کاربر
+            const confirmation = confirm("Are you sure you want to proceed?");
 
-        // اگر کاربر تایید نکرد، جلوگیری از اجرای لینک یا دکمه
-        if (!confirmation) {
-            event.preventDefault();
+            // اگر کاربر تایید نکرد، جلوگیری از اجرای لینک یا دکمه
+            if (!confirmation) {
+                event.preventDefault();
+            }
+
+            // بازگشت نتیجه تایید
+            return confirmation;
         }
-
-        // بازگشت نتیجه تایید
-        return confirmation;
-    }
-</script>
+    </script>
 
 </body>
 </html>

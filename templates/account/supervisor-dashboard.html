@@ -237,8 +237,17 @@
                                                         {% elif user.income_settlement == 4 %}
                                                             <strong>نوع تسویه:</strong> ماهانه
                                                         {% endif %}
+
                                                     </li>
+
+
                                                 </ul>
+                                                <div class="d-flex justify-content-start mt-1">
+                                                    <a href='{% url 'account:update-supervisor' user.phone_number %}' style="border-radius: 12px;"
+                                                       class="btn btn-sm btn-warning custom-btn">ویرایش اطلاعات
+                                                        کاربری</a>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>

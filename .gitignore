@@ -1,3 +1,6 @@
 media/
 env/
-
+*.pyc
+.idea/
+*/migrations/__pycache__/
+db.sqlite3

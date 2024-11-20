@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 import dj_database_url
+from django.contrib.messages import constants as messages
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -148,3 +149,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MERCHANT = '4d8d8b43-e629-4a19-8f53-a1831385af42'
 
 SANDBOX = False
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}

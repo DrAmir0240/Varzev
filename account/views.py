@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.utils.decorators import method_decorator
@@ -98,6 +99,71 @@ class SuperVisorRegister(View):
         else:
             messages.error(request, "کد اعتبار سنجی ارسال نشد لطفا بعدا امتحان کنید !")
             return redirect('account:register-supervisor')
+
+
+class SuperVisorRegisterUpdate(LoginRequiredMixin, View):
+    def get(self, request, phone):
+        user = get_object_or_404(User, phone_number=phone)
+        form = SupervisorRegistrationForm(initial={
+            'national_code': user.national_code,
+            'email': user.email,
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'birth_date': user.birth_date,
+            'city': user.city,
+            'zone': user.zone,
+            'delivery_date': user.delivery_date,
+            'sheba_name': user.sheba_name,
+            'sheba_number': user.sheba_number,
+            'income_settlement': user.income_settlement,
+        })
+        return render(request, 'account/supervisor-register-edit.html', context={'form': form})
+
+    def post(self, request, phone):
+        user = get_object_or_404(User, phone_number=phone)
+        national_code = request.POST['national_code']
+        email = request.POST['email']
+
+        # Check for uniqueness of national_code and email
+        if User.objects.exclude(id=user.id).filter(national_code=national_code).exists():
+            messages.error(request, 'این کد ملی قبلاً ثبت شده است.')
+            return redirect(request.path)
+
+        if User.objects.exclude(id=user.id).filter(email=email).exists():
+            messages.error(request, 'این ایمیل قبلاً ثبت شده است.')
+            return redirect(request.path)
+
+            # If unique, update user details
+        user.national_code = national_code
+        user.email = email
+        user.first_name = request.POST['first_name']
+        user.last_name = request.POST['last_name']
+        user.birth_date = request.POST['birth_date']
+        user.city = request.POST['city']
+        user.zone = request.POST['zone']
+        user.delivery_date = request.POST['delivery_date']
+        user.sheba_name = request.POST['sheba_name']
+        user.sheba_number = request.POST['sheba_number']
+        user.income_settlement = request.POST['income_settlement']
+        user.save()
+
+        # Store session data
+        request.session['national_code'] = user.national_code
+        request.session['first_name'] = user.first_name
+        request.session['last_name'] = user.last_name
+        request.session['password'] = user.password
+        request.session['email'] = user.email
+        request.session['birth_date'] = user.birth_date
+        request.session['city'] = user.city
+        request.session['zone'] = user.zone
+        request.session['delivery_date'] = user.delivery_date
+        request.session['sheba_name'] = user.sheba_name
+        request.session['sheba_number'] = user.sheba_number
+        request.session['income_settlement'] = user.income_settlement
+        request.session['role'] = 4
+
+        messages.success(request, 'اطلاعات پنل شما ویرایش شد')
+        return redirect(reverse('account:supervisor-dashboard', kwargs={'phone': phone}))
 
 
 class VerifyOTPView(View):
