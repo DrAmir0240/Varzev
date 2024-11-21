@@ -243,7 +243,8 @@
 
                                                 </ul>
                                                 <div class="d-flex justify-content-start mt-1">
-                                                    <a href='{% url 'account:update-supervisor' user.phone_number %}' style="border-radius: 12px;"
+                                                    <a href='{% url 'account:update-supervisor' user.phone_number %}'
+                                                       style="border-radius: 12px;"
                                                        class="btn btn-sm btn-warning custom-btn">ویرایش اطلاعات
                                                         کاربری</a>
                                                 </div>
@@ -269,7 +270,7 @@
                                             <div class="col-md-6">
                                                 <ul class="list-group text-right">
                                                     <li class="list-group-item db-item" style="border-radius: 12px">
-                                                        ساهت
+                                                        ساعت
                                                         کاری : {{ complex.start_time }}-{{ complex.end_time }}</li>
                                                     <br>
                                                     <li class="list-group-item db-item" style="border-radius: 12px">
@@ -291,11 +292,13 @@
                                                     <br>
                                                 </ul>
                                             </div>
-                                            <div class="col-md-6 image-container">
-                                                <img style="border-radius: 12px;"
-                                                     src="{{ complex.complex_img.url }}"
-                                                     alt="عکس" class="img-fluid">
-                                            </div>
+                                            {% if complex.complex_img %}
+                                                <div class="col-md-6 image-container">
+                                                    <img style="border-radius: 12px;"
+                                                         src="{{ complex.complex_img.url }}"
+                                                         alt="عکس" class="img-fluid">
+                                                </div>
+                                            {% endif %}
                                         </div>
                                         <!-- قسمت سمت چپ (عکس) -->
                                         <!-- دکمه‌ها -->
@@ -303,20 +306,24 @@
                                             <button style="border-radius: 12px;" class="btn btn-danger custom-btn">
                                                 حذف
                                             </button>
-                                            <button style="border-radius: 12px;" class="btn btn-warning custom-btn">
+                                            <button style="border-radius: 12px;" class="btn btn-warning text-light custom-btn">
                                                 ویرایش
                                             </button>
-                                            <button style="border-radius: 12px;" class="btn btn-success custom-btn">
+                                            <button style="border-radius: 12px;" class="text-light btn btn-info custom-btn">
                                                 سانس
                                                 ها
                                             </button>
+                                            <a href="{% url 'create-complex' %}" style="border-radius: 12px;"
+                                               class="btn btn-success custom-btn">افزودن مجموعه جدید</a>
+
                                         </div>
                                     </div>
                                 {% endfor %}
                             {% else %}
                                 <h3 class="text-center text-danger">هنوز مجموعه ای اضافه نکردید</h3>
                                 <br>
-                                <a href="{% url 'create-complex' %}" class="btn btn-success">افزودن مجموعه جدید</a>
+                                <a href="{% url 'create-complex' %}" style="border-radius: 12px;"
+                                   class="btn btn-success custom-btn">افزودن مجموعه جدید</a>
                             {% endif %}
                         </div>
                         <div id="رزرو" class="content-section select2-dropdown overflow-auto">

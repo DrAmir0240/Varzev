@@ -28,7 +28,7 @@ class Complex(models.Model):
     complex_name = models.CharField(max_length=255)
     slug = AutoSlugField(populate_from='complex_name', unique=True, always_update=True)
     complex_description = models.TextField(blank=True, max_length=700)
-    complex_img = models.ImageField(upload_to='photos/complexes', blank=True)
+    complex_img = models.ImageField(upload_to='photos/complexes/', blank=True,null=True)
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
     area = models.IntegerField()
     price_variation = models.BooleanField(default=False)
@@ -41,7 +41,7 @@ class Complex(models.Model):
     end_time = models.TimeField()
     session_long = models.CharField(max_length=255)
     close_days = models.CharField(max_length=255)
-    is_active = models.BooleanField()
+    is_active = models.BooleanField(default=False)
 
     def get_url(self):
         return reverse('complex_detail', args=[self.category.slug, self.slug])

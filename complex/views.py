@@ -9,6 +9,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
 from account.models import User
+from .forms import ComplexForm
 from .models import Complex, Session, Category
 
 
@@ -59,40 +60,28 @@ def complexes_detail(request, category_slug, complex_slug):
 
 @login_required
 def create_complex(request):
-    categories = Category.objects.all()
-    complecs = Complex()
-    user = get_object_or_404(User, pk=request.user.pk)
-    if request.method == 'POST':
-        print(request.POST)
-        complecs.supervisor = user
-        complecs.complex_name = request.POST['complex_name']
-        complecs.complex_description = request.POST['complex_description']
-        complecs.complex_img = request.POST['complex_img']
-        category_post = request.POST['category']
-        print(category_post)
-        category = get_object_or_404(Category, category_name=category_post)
-        complecs.category = category
-        complecs.area = request.POST['area']
-        variation = request.POST.get('price_variation')
-        price_variation = bool(variation)
-        print(price_variation)
-        complecs.price_variation = price_variation
-        complecs.price = request.POST['price']
-        complecs.Address = request.POST['Address']
-        complecs.city = request.POST['city']
-        complecs.neighborhood = request.POST['zone']
-        complecs.guards_count = request.POST['guards_count']
-        complecs.start_time = request.POST['start_time']
-        complecs.end_time = request.POST['end_time']
-        complecs.session_long = int(request.POST['session_long'])
-        complecs.close_days = request.POST['close_days']
-        complecs.is_active = False
-        complecs.save()
-        messages.success(request, "مجموعه شما با موفقیت ثبت شد منتظر تایید بمانید...")
-        return redirect(reverse('account:supervisor-dashboard', kwargs={'phone': user.phone_number}))
 
-    else:
-        return render(request, 'complex/create-complex.html', {'categories': categories})
+    categories = Category.objects.all()
+    user = get_object_or_404(User, pk=request.user.pk)
+
+    if request.method == 'POST':
+        complex_form = ComplexForm(request.POST, request.FILES)
+        if complex_form.is_valid():
+            complex_obj = complex_form.save(commit=False)
+            complex_obj.supervisor = user
+            complex_obj.save()
+            messages.success(request, 'مجموعه با موفقیت ساخته شد')
+            return redirect(reverse('account:supervisor-dashboard', kwargs={'phone': user.phone_number}))
+        else:
+            return render(request, 'complex/create-complex.html', {
+                'categories': categories,
+                'complex_form': complex_form
+            })
+
+    return render(request, 'complex/create-complex.html', {
+        'categories': categories,
+        'complex_form': ComplexForm()
+    })
 
 
 # def complex_edit(request, complex_slug):
