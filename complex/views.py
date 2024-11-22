@@ -60,7 +60,6 @@ def complexes_detail(request, category_slug, complex_slug):
 
 @login_required
 def create_complex(request):
-
     categories = Category.objects.all()
     user = get_object_or_404(User, pk=request.user.pk)
 
@@ -70,7 +69,7 @@ def create_complex(request):
             complex_obj = complex_form.save(commit=False)
             complex_obj.supervisor = user
             complex_obj.save()
-            messages.success(request, 'مجموعه با موفقیت ساخته شد')
+            messages.success(request, f'مجموعه {complex_obj.complex_name} با موفقیت ساخته شد ')
             return redirect(reverse('account:supervisor-dashboard', kwargs={'phone': user.phone_number}))
         else:
             return render(request, 'complex/create-complex.html', {
@@ -84,10 +83,19 @@ def create_complex(request):
     })
 
 
-# def complex_edit(request, complex_slug):
-#     complecs = get_object_or_404(Complex, slug=complex_slug)
-#     user = get_object_or_404(User, pk=request.user.pk)
-#     return render(request, 'complex/edit-complex.html', {'complex': complecs})
+def edit_complex(request, complex_slug):
+    categories = Category.objects.all()
+    complex_obj = get_object_or_404(Complex, slug=complex_slug)
+    user = get_object_or_404(User, pk=request.user.pk)
+    complex_form = ComplexForm(request.POST or None, instance=complex_obj)
+    if complex_form.is_valid():
+        complex_form.save()
+        messages.success(request, f'مجموعه  {complex_obj.complex_name} با موفقیت ویرایش شد ')
+        return redirect(reverse('account:supervisor-dashboard', kwargs={'phone': user.phone_number}))
+    return render(request, 'complex/create-complex.html', {
+        'categories': categories,
+        'complex_form': complex_form
+    })
 
 
 def session_list(request, category_slug, complex_slug):

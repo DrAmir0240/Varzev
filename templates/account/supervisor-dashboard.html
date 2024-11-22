@@ -306,13 +306,13 @@
                                             <button style="border-radius: 12px;" class="btn btn-danger custom-btn">
                                                 حذف
                                             </button>
-                                            <button style="border-radius: 12px;" class="btn btn-warning text-light custom-btn">
+                                            <a href="{% url 'edit-complex' complex.slug%}" style="border-radius: 12px;" class="btn btn-warning text-light custom-btn">
                                                 ویرایش
-                                            </button>
-                                            <button style="border-radius: 12px;" class="text-light btn btn-info custom-btn">
+                                            </a>
+                                            <a style="border-radius: 12px;" class="text-light btn btn-info custom-btn">
                                                 سانس
                                                 ها
-                                            </button>
+                                            </a>
                                             <a href="{% url 'create-complex' %}" style="border-radius: 12px;"
                                                class="btn btn-success custom-btn">افزودن مجموعه جدید</a>
 

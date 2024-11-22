@@ -8,7 +8,7 @@
             <div class="bg-gray gray-shadow rounded-8 mx-0 row">
                 <div class="py-4 px-5">
                     <div>
-                        <form action="{% url 'create-complex' %}" method="POST" enctype="multipart/form-data">
+                        <form method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="shop-title mb-4">
                                 <h3>اطلاعات مجموعه</h3>
@@ -18,7 +18,8 @@
                                     <div class="info-field">
                                         <label for="">نام مجموعه</label>
                                         <input name='complex_name' type="text"
-                                               class="info-input">
+                                               class="info-input"
+                                               value="{{ complex_form.complex_name.value|default:'' }}">
                                     </div>
                                     {% if complex_form.complex_name.errors %}
                                         <div class="error text-danger text-sm-right">{{ complex_form.complex_name.errors }}</div>
@@ -29,7 +30,7 @@
                                         <label for="">قیمت معمول هر سانس</label>
                                         <input name='price'
                                                placeholder="قیمت را به هزار تومان وارد کنید به طور مثال 250" type="text"
-                                               class="info-input">
+                                               class="info-input" value="{{ complex_form.price.value|default:'' }}">
                                     </div>
                                     {% if complex_form.price.errors %}
                                         <div class="error text-danger text-sm-right">{{ complex_form.price.errors }}</div>
@@ -45,7 +46,9 @@
                                                     class="see-all__btn d-flex align-items-center justify-content-center mt-"
                                                     required>
                                                 {% for category in categories %}
-                                                    <option value="{{ category.id }}">{{ category.category_name }}</option>
+                                                    <option value="{{ category.id }}"
+                                                            {% if category.id == complex_form.category.value %}
+                                                            selected {% endif %}>{{ category.category_name }}</option>
                                                 {% endfor %}
                                             </select>
                                         </div>
@@ -59,8 +62,14 @@
                                             <select style="width: 350px" name="price_variation"
                                                     class="see-all__btn d-flex align-items-center justify-content-center mt-"
                                                     required>
-                                                <option value="0">خیر</option>
-                                                <option value="1">بله</option>
+                                                <option value=False
+                                                        {% if complex_form.price_variation.value == False %}selected{% endif %}>
+                                                    خیر
+                                                </option>
+                                                <option value=True
+                                                        {% if complex_form.price_variation.value == True %}selected{% endif %}>
+                                                    بله
+                                                </option>
                                             </select>
                                         </label>
                                         {% if complex_form.price_variation.errors %}
@@ -73,11 +82,19 @@
                             <div class="d-flex align-items-center pb-3 my-3">
                                 <div class="col-12">
                                     <div class="upload-field d-flex flex-wrap align-items-center justify-content-center justify-content-sm-between position-relative p-4">
+
                                         <input type="file" name="complex_img" class="upload-input">
                                         <div class="d-flex align-items-center me-4">
                                             <div class="upload-text">
                                                 <h4>عکس پروفایل خود را وارد کنید</h4>
                                                 <p>حداکثر 5 مگابایت باشد.</p>
+                                            </div>
+                                            <div>
+                                                {% if complex_form.instance.complex_img %}
+                                                    <img alt='img' src="{{ complex_form.instance.complex_img.url }}"
+                                                         class="img-fluid mr-3"
+                                                         style="max-width: 150px; border-radius:10px;height: auto;">
+                                                {% endif %}
                                             </div>
                                             {% if complex_form.complex_img.errors %}
                                                 <div class="error text-danger text-sm-right">{{ complex_form.complex_img.errors }}</div>
@@ -95,7 +112,8 @@
                                         <label for="">مساحت</label>
                                         <div class="d-flex align-items-center">
                                             <input name='area' type="number"
-                                                   class="info-input text-right">
+                                                   class="info-input text-right"
+                                                   value="{{ complex_form.area.value|default:'' }}">
                                         </div>
                                         {% if complex_form.area.errors %}
                                             <div class="error text-danger text-sm-right">{{ complex_form.area.errors }}</div>
@@ -107,7 +125,8 @@
                                         <label for="">تعداد نگهبان</label>
                                         <div class="d-flex align-items-center">
                                             <input name='guards_count' type="number"
-                                                   class="info-input text-right">
+                                                   class="info-input text-right"
+                                                   value="{{ complex_form.guards_count.value|default:'' }}">
                                         </div>
                                         {% if complex_form.guards_count.errors %}
                                             <div class="error text-danger text-sm-right">{{ complex_form.guards_count.errors }}</div>
@@ -119,7 +138,8 @@
                                         <label for="">توضیحات مجموعه</label>
                                         <div class="d-flex align-items-center">
                                             <input name='complex_description' type="text"
-                                                   class="info-input text-right">
+                                                   class="info-input text-right"
+                                                   value="{{ complex_form.complex_description.value|default:'' }}">
                                         </div>
                                         {% if complex_form.complex_description.errors %}
                                             <div class="error text-danger text-sm-right">{{ complex_form.complex_description.errors }}</div>
@@ -138,7 +158,8 @@
                                         <label for="">شروع ساعت کاری</label>
                                         <div class="d-flex align-items-center">
                                             <input name='start_time' type="time"
-                                                   class="info-input text-right">
+                                                   class="info-input text-right"
+                                                   value="{{ complex_form.instance.start_time|date:'H:i'|default:'' }}">
                                         </div>
                                         {% if complex_form.start_time.errors %}
                                             <div class="error text-danger text-sm-right">{{ complex_form.start_time.errors }}</div>
@@ -149,7 +170,8 @@
                                     <div class="info-field">
                                         <label for="">پایان ساعت کاری</label>
                                         <div class="d-flex align-items-center">
-                                            <input name='end_time' type="time" class="info-input text-right">
+                                            <input name='end_time' type="time" class="info-input text-right"
+                                                   value="{{ complex_form.instance.end_time|date:'H:i'|default:'' }}">
                                         </div>
                                         {% if complex_form.end_time.errors %}
                                             <div class="error text-danger text-sm-right">{{ complex_form.end_time.errors }}</div>
@@ -165,9 +187,18 @@
                                             <select style="width: 350px" name="session_long"
                                                     class="see-all__btn d-flex align-items-center justify-content-center mt-"
                                                     required>
-                                                <option value="60">۶۰ دقیقه</option>
-                                                <option value="90">۹۰ دقیقه</option>
-                                                <option value="120">۱۲۰ دقیقه</option>
+                                                <option value="60"
+                                                        {% if complex_form.session_long.value == '60' %}selected{% endif %}>
+                                                    ۶۰ دقیقه
+                                                </option>
+                                                <option value="90"
+                                                        {% if complex_form.session_long.value == '90' %}selected{% endif %}>
+                                                    ۹۰ دقیقه
+                                                </option>
+                                                <option value="120"
+                                                        {% if complex_form.session_long.value == '120' %}selected{% endif %}>
+                                                    ۱۲۰ دقیقه
+                                                </option>
                                             </select>
                                             {% if complex_form.session_long.errors %}
                                                 <div class="error text-danger text-sm-right">{{ complex_form.session_long.errors }}</div>
@@ -180,7 +211,8 @@
                                         <label for="">روز های تعطیل</label>
                                         <div class="d-flex align-items-center">
                                             <input name='close_days' type="text"
-                                                   class="info-input text-right">
+                                                   class="info-input text-right"
+                                                   value="{{ complex_form.close_days.value|default:'' }}">
                                         </div>
                                         {% if complex_form.close_days.errors %}
                                             <div class="error text-danger text-sm-right">{{ complex_form.close_days.errors }}</div>
@@ -198,7 +230,8 @@
                                     <div class="info-field">
                                         <label for="">شهر</label>
                                         <div class="d-flex align-items-center">
-                                            <input name='city' type="text" class="info-input text-right">
+                                            <input name='city' type="text" class="info-input text-right"
+                                                   value="{{ complex_form.city.value|default:'' }}">
                                         </div>
                                         {% if complex_form.city.errors %}
                                             <div class="error text-danger text-sm-right">{{ complex_form.city.errors }}</div>
@@ -209,7 +242,8 @@
                                     <div class="info-field">
                                         <label for="">منطقه یا محله</label>
                                         <div class="d-flex align-items-center">
-                                            <input name='neighborhood' type="text" class="info-input text-right">
+                                            <input name='neighborhood' type="text" class="info-input text-right"
+                                                   value="{{ complex_form.neighborhood.value|default:'' }}">
                                         </div>
                                         {% if complex_form.neighborhood.errors %}
                                             <div class="error text-danger text-sm-right">{{ complex_form.neighborhood.errors }}</div>
@@ -222,7 +256,8 @@
                                     <div class="info-field">
                                         <label for="">آدرس</label>
                                         <div class="d-flex align-items-center">
-                                            <input name='Address' type="text" class="info-input text-right">
+                                            <input name='Address' type="text" class="info-input text-right"
+                                                   value="{{ complex_form.Address.value|default:'' }}">
                                         </div>
                                         {% if complex_form.Address.errors %}
                                             <div class="error text-danger text-sm-right">{{ complex_form.Address.errors }}</div>
