@@ -45,23 +45,28 @@
                                         <td class="text-center">{{ session.session_price }}</td>
                                         {% if user_is_supervisor %}
                                             <td class="text-left text-success"><a class="text-warning"
-                                                                                      href="{% url 'edit_session' session.complex.category.slug session.complex.slug session.id %}">ویرایش</a>
-                                        {% else %}
-                                            {% if  not session.is_reserved and session.is_available %}
-                                                <td class="text-left text-success"><a class="text-success"
-                                                                                      href="{% url 'reserve' session.id %}">رزرو</a>
-                                                </td>
-                                            {% else %}
-                                                <td class="text-left text-danger disabled">رزرو شده</td>
-                                            {% endif %}
+                                                                                  href="{% url 'edit_session' session.complex.category.slug session.complex.slug session.id %}">ویرایش</a>
+                                                {% else %}
+                                                {% if  not session.is_reserved and session.is_available %}
+                                                    <td class="text-left text-success"><a class="text-success"
+                                                                                          href="{% url 'reserve' session.id %}">رزرو</a>
+                                                    </td>
+                                                {% else %}
+                                                    <td class="text-left text-danger disabled">رزرو شده</td>
+                                                {% endif %}
                                         {% endif %}
                                     </tr>
                                 {% endfor %}
                                 </tbody>
                             {% else %}
-                                <h3 class="text-danger">سانسی در این تاریخ موجود نیست</h3>
+                                {% if user.is_supervisor %}
+                                    <h3 class="text-danger">سانسی در این تاریخ موجود نیست</h3>
+                                    <br>
+                                    <a href="{% url 'create-session' complex.category.slug complex.slug %}" class="btn btn-success">افزودن سانس</a>
+                                {% else %}
+                                    <h3 class="text-danger">سانسی در این تاریخ موجود نیست</h3>
+                                {% endif %}
                             {% endif %}
-
                         </table>
                     </div>
                 </div>
@@ -69,6 +74,4 @@
             </div>
         </div>
     </section>
-
-
 {% endblock %}

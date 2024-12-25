@@ -129,13 +129,20 @@ def create_sessions(request, category_slug, complex_slug):
         str_end_date = request.POST.get('end_date')
         print(f'received {str_start_date} and {str_end_date} correctly')
         try:
-            start_date_jalali = jdatetime.datetime.strptime(str_start_date, '%Y-%m-%d')
-            end_date_jalali = jdatetime.datetime.strptime(str_end_date, '%Y-%m-%d')
+            # تبدیل رشته به jdatetime.datetime
+            start_date_jalali = jdatetime.datetime.strptime(str_start_date, '%Y/%m/%d')
+            end_date_jalali = jdatetime.datetime.strptime(str_end_date, '%Y/%m/%d')
+
+            # تبدیل تاریخ جلالی به میلادی
             start_date_gregorian = start_date_jalali.togregorian()
             end_date_gregorian = end_date_jalali.togregorian()
-            start_date = datetime.date(start_date_gregorian)
-            end_date = datetime.date(end_date_gregorian)
+
+            # تبدیل Gregorian datetime به تاریخ ساده (date)
+            start_date = start_date_gregorian.date()
+            end_date = end_date_gregorian.date()
+
             print(f'received {start_date} and {end_date}')
+
         except ValueError as e:
             messages.error(request, 'فرمت تاریخ ورودی نادرست است.')
             return redirect(

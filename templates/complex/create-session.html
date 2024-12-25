@@ -7,29 +7,41 @@
         <div class="container">
             <div class="bg-gray gray-shadow rounded-8 mx-0 row">
                 <div class="py-4 px-5">
-                    <form class="text-center"
+                    <form class="text-center card-body login-form"
                           action="{% url 'create-session' complex.category.slug complex.slug %}"
                           method="POST">
                         {% csrf_token %}
                         <div class="shop-title mb-4">
                             <h3>ساخت سانس برای {{ complex.complex_name }}</h3>
                         </div>
-                        <div class="text-center info-field">
-                            <label for="">تاریخ شروع را وارد کنید</label>
-                            <input name='start_date' type="text"
-                                   placeholder="1403-08-03" class="text-center info-input"
-                                   required>
-                        </div>
-                        <div class="text-center info-field">
-                            <label for="">تاریخ پایان را وارد کنید</label>
-                            <input name='end_date' type="text"
-                                   placeholder="1403-08-03" class="text-center info-input"
-                                   required>
-                        </div>
+                        <label class="" for="date">تاریخ شروع را وارد کنید:</label>
+                        <input name="start_date"
+                               class="border rounded-pill btn border-success border-4 form-control text-center"
+                               type="text" id="date" data-jdp data-jdp-min-date="today"
+                               data-jdp-max-date="1410/12/29" placeholder="برای انتخاب تاریخ کلیک کنید">
+                        <br><br>
+                        <label class="" for="date">تاریخ پایان را وارد کنید:</label>
+                        <input name="end_date"
+                               class="border rounded-pill btn border-success border-4 form-control text-center"
+                               type="text" id="date" data-jdp data-jdp-min-date="today"
+                               data-jdp-max-date="1410/12/29" placeholder="برای انتخاب تاریخ کلیک کنید">
+                        <br><br>
+{#                        <div class="text-center info-field">#}
+{#                            <label for="">تاریخ شروع را وارد کنید</label>#}
+{#                            <input name='start_date' id="date" type="text"#}
+{#                                   placeholder="1403-08-03" class="text-center info-input"#}
+{#                                   required>#}
+{#                        </div>#}
+{#                        <div class="text-center info-field">#}
+{#                            <label for="">تاریخ پایان را وارد کنید</label>#}
+{#                            <input name='end_date' id="date" type="text"#}
+{#                                   placeholder="1403-08-03" class="text-center info-input"#}
+{#                                   required>#}
+{#                        </div>#}
                         <br>
                         {% for message in messages %}
                             <ul>
-                                <li>{{ message }}</li>
+                                <li class="text-danger">{{ message }}</li>
                             </ul>
                         {% endfor %}
                         <div class="text-center">

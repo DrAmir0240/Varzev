@@ -10,7 +10,7 @@
                 <div class="row">
                     <div class="col-xlg-7 col-lg-6 overflow-hidden mb-4 mb-lg-0">
                         <div class="single_cover">
-                            <div class="swiper-container product_single product-single__wrapper swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events swiper-container-rtl">
+                            <div style="border: 5px solid green;" class="swiper-container product_single product-single__wrapper swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events swiper-container-rtl">
                                 <div class="swiper-wrapper" id="swiper-wrapper-a9644e2a84f18cca" aria-live="polite"
                                      style="transform: translate3d(0px, 0px, 0px);">
                                     <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 4"
@@ -37,48 +37,43 @@
                         </div>
                     </div>
                     <div class="col-xlg-5 col-lg-6">
-                        <div class="single-post_content product_info d-flex flex-column align-items-center justify-content-between bg-white rounded-12 text-lg-left p-5">
+                        <div style="border: 5px solid green;" class="single-post_content product_info d-flex flex-column align-items-center justify-content-between bg-white rounded-12 text-lg-left p-5">
                             <div class="option-item d-flex align-items-center justify-content-between">
                                 <div>
-                                    <h5>{{ single_complex.complex_name }}</h5>
+                                    <h5 class=" user-profile-card">{{ single_complex.complex_name }}</h5>
                                 </div>
                             </div>
-                            <div class="option-item d-flex align-items-center justify-content-between">
+                            <div class=" user-profile-card option-item d-flex align-items-center justify-content-between">
                                 <div>
                                     <h5>قیمت معمول هر سانس: {{ single_complex.price }} هزار تومان</h5>
                                 </div>
                             </div>
-                            <div class="option-item d-flex align-items-center justify-content-between">
+                            <div class="option-item d-flex align-items-center justify-content-between user-profile-card">
                                 <div>
                                     <h5>ساعت کاری: {{ single_complex.start_time }}-{{ single_complex.end_time }}</h5>
                                 </div>
                             </div>
-                            <div class="option-item d-flex align-items-center justify-content-between">
+                            <div class="option-item d-flex align-items-center justify-content-between user-profile-card">
                                 <div>
                                     <h5>مدت زمان سانس ها: {{ single_complex.session_long }} دقیقه</h5>
                                 </div>
                             </div>
-                            <div class="option-item d-flex align-items-center justify-content-between">
+                            <div class="option-item d-flex align-items-center justify-content-between user-profile-card">
                                 <div>
                                     <h5>منطقه: {{ single_complex.city }}/{{ single_complex.neighborhood }}</h5>
                                 </div>
                             </div>
-                            <div class="option-item d-flex align-items-center justify-content-between">
+                            <div class="option-item d-flex align-items-center justify-content-between user-profile-card">
                                 <div>
                                     <h5>روز های تعطیل : {{ single_complex.close_days }}</h5>
                                 </div>
                             </div>
-                            <div class="option-item d-flex align-items-center justify-content-between">
-                                <div>
-                                    <h5>تلفن : {{ single_complex.supervisor.phone_number }}</h5>
-                                </div>
-                            </div>
-                            <div class="option-item d-flex align-items-center justify-content-between">
+                            <div class="option-item d-flex align-items-center justify-content-between user-profile-card">
                                 <div>
                                     <h5>آدرس: {{ single_complex.Address }}</h5>
                                 </div>
                             </div>
-                            <div class="option-item d-flex align-items-center justify-content-between">
+                            <div class="option-item d-flex align-items-center justify-content-between user-profile-card">
                                 <div>
                                     <h5>توضیحات: {{ single_complex.complex_description }}</h5>
                                 </div>

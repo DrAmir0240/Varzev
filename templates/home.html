@@ -28,7 +28,7 @@
                             <div class="swiper-wrapper">
                                 {% for complex in complexes %}
                                     <div class="swiper-slide">
-                                        <div class="place-card place-shop">
+                                        <div class="place-card place-shop" style="border: 5px solid green;">
                                             <div class="place-card__img simple-img">
                                                 <a href="{{ complex.get_url }}">
                                                     <img src="{{ complex.complex_img.url }}" alt="">

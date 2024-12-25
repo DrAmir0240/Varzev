@@ -28,12 +28,4 @@ urlpatterns = [
     path('', include('complex.urls'), name='home'),
     path('captcha/', include('captcha.urls'), name='captcha'),
     path('reserve/', include('payment.urls'), name='payments'),
-]
-
-
-if not settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL, document_root=MEDIA_ROOT)
-else:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL, document_root=MEDIA_ROOT)
+]+static(settings.MEDIA_URL, document_root=MEDIA_ROOT)
