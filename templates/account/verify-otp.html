@@ -31,6 +31,13 @@
                     </form>
                 </div>
             </div>
+            <br>
+            {% for message in messages %}
+                <ul class="text-center">
+                    <li class="text-danger">{{ message }}</li>
+                </ul>
+            {% endfor %}
+        
             <div class="return-link text-center mt-4">
                 <a href="#">بازگشت -></a>
             </div>

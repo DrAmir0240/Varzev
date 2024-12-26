@@ -1,40 +1,27 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <!--------login Section-------->
+    <!--------forget password Section-------->
     <div class=" d-flex align-items-center justify-content-center">
         <div>
             <br>
             <br>
             <div class="login-form">
                 <div class="login-form__header text-center mb-5">
-                    <h3>ورود</h3>
+                    <h3>تایید کد OTP</h3>
                 </div>
-                <form action="{% url 'account:login' %}" method="POST">
+                <form action="{% url 'account:confirm-code' %}" method="POST">
                     {% csrf_token %}
                     <div class="login-input">
                         <div class="text-center">
                             <span class="text-danger" id="error" style="display: none">مشکلی رخ داده است</span>
                         </div>
-
-                        <input name="phone_number" type="text" id="phone" maxlength="11"
-                               placeholder="شماره موبایل خود را وارد کنید..."
+                        <input name="otp" type="text" id="phone" maxlength="11"
+                               placeholder="کد تایید را وارد کنید..."
                                class="login-input__field rounded-12">
-                        <input name="password" type="password" id="password" maxlength="15" placeholder="رمز ورود"
-                               class="login-input__field rounded-12">
-                        <div class="accept-label d-flex align-items-center"><p class="accept-text">رمز خود را فراموش
-                            کردید ؟ <a style="color: #0a53be"
-                                       href="{% url 'account:forget-password' %}">بازیابی</a></p>
-                        </div>
-                        <br>
                         <input type="button" class="login-confirm__btn rounded-12" value="تایید" onclick="submit()">
                     </div>
                 </form>
-                <div class="accept-label d-flex align-items-center">
-                    <p class="accept-text">حساب ندارید ؟ <a style="color: #2abb7b" href="{% url 'account:register' %}">ثبت
-                        نام</a></p>
-                </div>
-                <br>
             </div>
             <br>
             {% for message in messages %}
@@ -47,5 +34,5 @@
             </div>
         </div>
     </div>
-    <!--------login Section-------->
+    <!--------forget password Section-------->
 {% endblock %}

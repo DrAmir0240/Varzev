@@ -176,7 +176,12 @@
                     </div>
 
                 </div>
-
+                <br>
+            {% for message in messages %}
+                <ul class="text-center">
+                    <li class="text-danger">{{ message }}</li>
+                </ul>
+            {% endfor %}
             </div>
 
         </div>

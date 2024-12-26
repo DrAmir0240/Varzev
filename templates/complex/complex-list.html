@@ -11,39 +11,25 @@
                     <div class="categories_part">
 
                         <div class="categories_item" id="fade-content">
-                            <div class="search-filter rounded-8 d-flex align-items-center justify-content-between">
+
+                            <form action="{% url 'search' %}" method="get"
+                                  class="search-filter user-profile-card rounded-8 d-flex align-items-center justify-content-between">
                                 <input type="text" class="search-input"
                                        placeholder="جستجو..." name="keyword">
-                                <div class="search-icon">
-                                        <span>
-                                            <svg id="Iconly_Light_Search" data-name="Iconly/Light/Search"
-                                                 xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                 viewBox="0 0 24 24">
-                                                <g id="Search" transform="translate(2 2)">
-                                                    <circle id="Ellipse_739" cx="8.989" cy="8.989" r="8.989"
-                                                            transform="translate(0.778 0.778)" fill="none"
-                                                            stroke="#c1c1c1"
-                                                            stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-miterlimit="10" stroke-width="1.5"></circle>
-
-                                                    <path id="Line_181" d="M0,0,3.524,3.515"
-                                                          transform="translate(16.018 16.485)" fill="none"
-                                                          stroke="#c1c1c1"
-                                                          stroke-linecap="round" stroke-linejoin="round"
-                                                          stroke-miterlimit="10"
-                                                          stroke-width="1.5"></path>
-                                                </g>
-                                            </svg>
-                                        </span>
+                                <div class="input-group-append">
+                                    <button class="btn" type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
                                 </div>
-                            </div>
+                            </form>
+
                         </div>
                         <br>
                         <div style="height: fit-content" class="dashboard_panel">
+                            <h5 class="box text-center">دسته بندی مجموعه ها</h5>
                             <div class="user_dashboard dash">
-                                <h5 class="box text-center">دسته بندی مجموعه ها</h5>
                                 <ul class="user_menu">
-                                    <li class="active text-right">
+                                    <li class="active text-right user-profile-card">
                                         <a href="{% url 'complexes-list' %}">
                                             <svg width="38" height="38" viewBox="0 0 20 20">
                                                 <image width="20" height="20" opacity="0.923"
@@ -52,8 +38,9 @@
                                             همه
                                         </a>
                                     </li>
+                                    <br>
                                     {% for category in links %}
-                                        <li class="text-right active">
+                                        <li class="text-right active user-profile-card">
                                             <a href="{{ category.get_url }}" class="box">
                                                 <svg width="38" height="38" viewBox="0 0 20 20">
                                                     {% if category.category_name == 'فوتبال' %}
@@ -80,6 +67,7 @@
                                                 {{ category.category_name }}
                                             </a>
                                         </li>
+                                        <br>
                                     {% endfor %}
                                 </ul>
                             </div>
@@ -91,7 +79,7 @@
 
                 <div class="col-lg-9 col-md-8">
 
-                    <div class="filter_field d-flex align-items-center justify-content-between py-4 px-3 mb-4">
+                    <div class="user-profile-card filter_field d-flex align-items-center justify-content-between py-4 px-3 mb-4">
 
                         <div class="product_count">
                             <span>{{ complexes_count }} مجموعه یافت شد</span>
@@ -103,7 +91,7 @@
                             {% for complex in complexes %}
                                 <div class="col-lg-4 col-sm-6">
                                     <a href="{{ complex.get_url }}">
-                                        <div class="place-card place-shop d-flex flex-sm-column">
+                                        <div class="place-card place-shop d-flex flex-sm-column user-profile-card">
                                             <div class="place-card__img">
                                                 <img src="{{ complex.complex_img.url }}" alt="">
                                             </div>

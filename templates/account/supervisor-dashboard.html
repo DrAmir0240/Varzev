@@ -9,7 +9,8 @@
             <div class="user-option mb-5">
                 <div class="d-flex flex-wrap justify-content-between">
                     <div class="col-lg-6 col-sm-6 col-12 pe-0 pe-lg-3 pe-0 ps-sm-3 ps-lg-0">
-                        <a href="#" class="user-option__box bg-white d-flex align-items-center mb-3 p-3 user-profile-card">
+                        <a href="#"
+                           class="user-option__box bg-white d-flex align-items-center mb-3 p-3 user-profile-card">
                             <div class="user-icon user-option__icon box">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                      width="33" height="33" viewBox="0 0 33 33">
@@ -31,7 +32,8 @@
                     </div>
 
                     <div class="col-lg-6 col-sm-6 col-12 ps-0 pe-0 pe-sm-3">
-                        <a href="#" class="user-option__box bg-white d-flex align-items-center mb-3 p-3 user-profile-card">
+                        <a href="#"
+                           class="user-option__box bg-white d-flex align-items-center mb-3 p-3 user-profile-card">
                             <div class="user-icon user-option__icon ticket">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                      width="33" height="33" viewBox="0 0 33 33">
@@ -190,11 +192,12 @@
                                     </a>
                                 </li>
                             </ul>
-                            
+
                             <div class="text-center mt-4">
-                                            <a href="{% url 'create-complex' %}" class="btn btn-success text-center user-profile-card" style="color: black">افزودن
-                                                مجموعه جدید+</a>
-                                        </div>
+                                <a href="{% url 'create-complex' %}"
+                                   class="btn btn-success text-center user-profile-card" style="color: black">افزودن
+                                    مجموعه جدید+</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -209,30 +212,36 @@
                                 <div class="row justify-content-center">
                                     <div style="border-radius: 20px;" class="col-md-9">
                                         <div style="border-radius: 20px;" class="card">
-                                            <div style="border-radius: 20px;" class="card-body">
+                                            <div style="border:2px solid green; border-radius: 20px;" class="card-body">
                                                 <ul style="border-radius: 20px;" class="list-group">
-                                                    <li style="border-radius: 20px;" class="list-group-item text-right user-profile-card">
+                                                    <li style="border:2px solid green; border-radius: 20px;"
+                                                        class="list-group-item text-right user-profile-card">
                                                         <strong>نام:</strong> {{ user.full_name }}
                                                     </li>
                                                     <br>
-                                                    <li style="border-radius: 20px;" class="list-group-item text-right user-profile-card">
+                                                    <li style="border:2px solid green; border-radius: 20px;"
+                                                        class="list-group-item text-right user-profile-card">
                                                         <strong>ایمیل:</strong>
                                                         {{ user.email }}
                                                     </li>
                                                     <br>
-                                                    <li style="border-radius: 20px;" class="list-group-item text-right user-profile-card">
+                                                    <li style="border:2px solid green; border-radius: 20px;"
+                                                        class="list-group-item text-right user-profile-card">
                                                         <strong>شماره تلفن:</strong> {{ user.phone_number }}
                                                     </li>
                                                     <br>
-                                                    <li style="border-radius: 20px;" class="list-group-item text-right user-profile-card">
+                                                    <li style="border:2px solid green; border-radius: 20px;"
+                                                        class="list-group-item text-right user-profile-card">
                                                         <strong>شماره شبا:</strong> {{ user.sheba_number }}
                                                     </li>
                                                     <br>
-                                                    <li style="border-radius: 20px;" class="list-group-item text-right user-profile-card">
+                                                    <li style="border:2px solid green; border-radius: 20px;"
+                                                        class="list-group-item text-right user-profile-card">
                                                         <strong>صاحب حساب شبا:</strong> {{ user.sheba_name }}
                                                     </li>
                                                     <br>
-                                                    <li style="border-radius: 20px;" class="list-group-item text-right user-profile-card">
+                                                    <li style="border:2px solid green; border-radius: 20px;"
+                                                        class="list-group-item text-right user-profile-card">
                                                         {% if user.income_settlement == 1 %}
                                                             <strong>نوع تسویه:</strong> روزانه
                                                         {% elif user.income_settlement == 2 %}
@@ -245,6 +254,15 @@
                                                     </li>
                                                 </ul>
                                             </div>
+                                        </div>
+                                        <br>
+                                        <div class="text-center">
+                                            <a class="text-center" href="{% url 'account:forget-password' %}">
+                                                <button style="border-radius: 12px;"
+                                                        class="btn btn-warning custom-btn user-profile-card">ویرایش رمز
+                                                    عبور
+                                                </button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -262,54 +280,63 @@
                                             <h3 class="text-center">{{ complex.complex_name }}</h3>
                                             <!-- قسمت سمت راست (لیست) -->
                                             <br><br><br>
-                                            <div class="col-md-6">
-                                                <ul class="list-group text-right">
-                                                    <li class="list-group-item db-item user-profile-card" style="border-radius: 12px">
-                                                        ساهت
-                                                        کاری : {{ complex.start_time }}-{{ complex.end_time }}</li>
-                                                    <br>
-                                                    <li class="list-group-item db-item user-profile-card" style="border-radius: 12px">
-                                                        مدت
-                                                        زمان سانس ها: {{ complex.session_long }}</li>
-                                                    <br>
-                                                    <li class="list-group-item db-item user-profile-card" style="border-radius: 12px">
-                                                        منطقه: {{ complex.city }}/{{ complex.neighborhood }}</li>
-                                                    <br>
-                                                    <li class="list-group-item db-item user-profile-card" style="border-radius: 12px">
-                                                        روز
-                                                        های تعطیل: {{ complex.close_days }}</li>
-                                                    <br>
-                                                    <li class="list-group-item db-item user-profile-card" style="border-radius: 12px">
-                                                        آدرس: {{ complex.Address }}</li>
-                                                    <br>
-                                                    <li class="list-group-item db-item user-profile-card" style="border-radius: 12px">
-                                                        توضیحات: {{ complex.complex_description }}</li>
-                                                    <br>
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-6 image-container user-profile-card">
-                                                <img style="border-radius: 12px;"
-                                                     src="{{ complex.complex_img.url }}"
-                                                     alt="عکس" class="img-fluid">
-                                            </div>
+                                                <div class="col-md-6">
+                                                    <ul class="list-group text-right">
+                                                        <li class="list-group-item db-item user-profile-card"
+                                                            style="border:2px solid green; border-radius: 12px">
+                                                            ساهت
+                                                            کاری : {{ complex.start_time }}-{{ complex.end_time }}</li>
+                                                        <br>
+                                                        <li class="list-group-item db-item user-profile-card"
+                                                            style="border:2px solid green; border-radius: 12px">
+                                                            مدت
+                                                            زمان سانس ها: {{ complex.session_long }}</li>
+                                                        <br>
+                                                        <li class="list-group-item db-item user-profile-card"
+                                                            style="border:2px solid green; border-radius: 12px">
+                                                            منطقه: {{ complex.city }}/{{ complex.neighborhood }}</li>
+                                                        <br>
+                                                        <li class="list-group-item db-item user-profile-card"
+                                                            style="border:2px solid green; border-radius: 12px">
+                                                            روز
+                                                            های تعطیل: {{ complex.close_days }}</li>
+                                                        <br>
+                                                        <li class="list-group-item db-item user-profile-card"
+                                                            style="border:2px solid green; border-radius: 12px">
+                                                            آدرس: {{ complex.Address }}</li>
+                                                        <br>
+                                                        <li class="list-group-item db-item user-profile-card"
+                                                            style="border:2px solid green; border-radius: 12px">
+                                                            توضیحات: {{ complex.complex_description }}</li>
+                                                        <br>
+                                                    </ul>
+                                                </div>
+                                                <div style="border:2px solid green;"
+                                                     class="col-md-6 image-container user-profile-card">
+                                                    <img style="border-radius: 12px;"
+                                                         src="{{ complex.complex_img.url }}"
+                                                         alt="عکس" class="img-fluid">
+                                                </div>
                                         </div>
                                         <!-- قسمت سمت چپ (عکس) -->
                                         <!-- دکمه‌ها -->
                                         <div class="text-center mt-4">
-{#                                            <button style="border-radius: 12px; color: black;" class="btn btn-danger custom-btn user-profile-card">#}
-{#                                                حذف#}
-{#                                            </button>#}
-{#                                            <button style="border-radius: 12px;" class="btn btn-warning custom-btn user-profile-card">#}
-{#                                                ویرایش#}
-{#                                            </button>#}
+                                            {#                                            <button style="border-radius: 12px; color: black;" class="btn btn-danger custom-btn user-profile-card">#}
+                                            {#                                                حذف#}
+                                            {#                                            </button>#}
+                                            {#                                            <button style="border-radius: 12px;" class="btn btn-warning custom-btn user-profile-card">#}
+                                            {#                                                ویرایش#}
+                                            {#                                            </button>#}
                                             <a href="{% url 'session-list' complex.category.slug complex.slug %}">
-                                                <button style="border-radius: 12px; color: black;" class="btn btn-success custom-btn user-profile-card">
-                                                مدیریت سانس
-                                                ها
-                                            </button>
+                                                <button style="border-radius: 12px; color: black;"
+                                                        class="btn btn-success custom-btn user-profile-card">
+                                                    مدیریت سانس
+                                                    ها
+                                                </button>
                                             </a>
                                         </div>
                                     </div>
+                                    <hr>
                                 {% endfor %}
                             {% else %}
                                 <h3 class="text-center text-danger">هنوز مجموعه ای اضافه نکردید</h3>

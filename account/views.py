@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.utils.decorators import method_decorator
+from setuptools.package_index import user_agent
 
 from complex.models import Complex, Session
 from payment.models import Reserve, Payment
@@ -15,6 +16,7 @@ from django.views import View
 
 
 class RegisterUser(View):
+
     def get(self, request):
         form = RegistrationForm()
         return render(request, 'account/register.html', context={'form': form})
@@ -50,6 +52,7 @@ class RegisterUser(View):
 
 
 class SuperVisorRegister(View):
+
     def get(self, request):
         form = SupervisorRegistrationForm()
         return render(request, 'account/supervisor-register.html', context={'form': form})
@@ -100,7 +103,67 @@ class SuperVisorRegister(View):
             return redirect('account:register-supervisor')
 
 
+class ForgetPassword(View):
+    def get(self, request):
+        return render(request, "account/forget_password.html")
+
+    def post(self, request):
+        phone = request.POST['phone_number']
+        try:
+            user = get_object_or_404(User, phone_number=phone)
+            print(user)
+            otp = user.send_otp()
+            print(otp)
+            if otp:
+                request.session['otp'] = otp
+                request.session['phone'] = phone
+                print(phone)
+                messages.success(request, "کد اعتبار سنجی برای شما ارسال شد !")
+                return redirect('account:confirm-code')
+            else:
+                messages.error(request, "کد اعتبار سنجی ارسال نشد لطفا بعدا امتحان کنید !")
+                return redirect('account:forget-password')
+
+        except:
+            messages.error(request, "حساب کاربری با این شماره تلفن وجود ندارد !")
+            return redirect('account:forget-password')
+
+
+class ConfirmCode(View):
+    def get(self, request):
+        return render(request, 'account/confirm-code.html')
+
+    def post(self, request):
+        phone = request.session.get('phone')
+        print(phone)
+        entered_otp = request.POST.get('otp')
+        saved_otp = request.session.get('otp')
+        if entered_otp == saved_otp:
+            user = get_object_or_404(User, phone_number=phone)
+            login(request, user)
+            return redirect('account:reset-password')
+        else:
+            messages.error(request, "کد OTP صحیح نیست !")
+            return redirect('account:confirm-code')
+
+@login_required()
+def reset_password(request):
+    if request.method == 'POST':
+        password = request.POST["password"]
+        confirm_password = request.POST["confirm_password"]
+        if password == confirm_password:
+            user = request.user
+            user.set_password(password)
+            return redirect("home")
+        else:
+            messages.error(request, "رمز عبور مطابقت ندارد !")
+            return redirect('account:reset-password')
+    else:
+        return render(request, 'account/reset-password.html')
+
+
 class VerifyOTPView(View):
+
     def get(self, request):
         return render(request, 'account/verify-otp.html')
 
@@ -235,6 +298,21 @@ class Logout(APIView):
 
 
 @login_required()
+def dashboard(request, phone):
+    user = get_object_or_404(User, phone_number=phone)
+    reserves = Reserve.objects.filter(user=user, is_reserved=False)
+    payments = Payment.objects.filter(user=user)
+    payments_count = len(list(payments))
+    context = {
+        'user': user,
+        'reserves': reserves,
+        'payments': payments,
+        'payments_count': payments_count,
+    }
+    return render(request, 'account/dashboard.html', context=context)
+
+
+@login_required()
 def supervisor_dashboard(request, phone):
     user = get_object_or_404(User, phone_number=phone)
     complexes = Complex.objects.filter(supervisor=request.user)
@@ -258,18 +336,3 @@ def supervisor_dashboard(request, phone):
     }
 
     return render(request, 'account/supervisor-dashboard.html', context=context)
-
-
-@login_required()
-def dashboard(request, phone):
-    user = get_object_or_404(User, phone_number=phone)
-    reserves = Reserve.objects.filter(user=user, is_reserved=False)
-    payments = Payment.objects.filter(user=user)
-    payments_count = len(list(payments))
-    context = {
-        'user': user,
-        'reserves': reserves,
-        'payments': payments,
-        'payments_count': payments_count,
-    }
-    return render(request, 'account/dashboard.html', context=context)

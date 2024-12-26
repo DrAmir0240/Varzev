@@ -14,7 +14,8 @@
                             {% if messages %}
                                 <ul class="messages">
                                     {% for message in messages %}
-                                        <li style="color: darkred" class="{% if message.tags %}{{ message.tags }}{% endif %}">
+                                        <li style="color: darkred"
+                                            class="{% if message.tags %}{{ message.tags }}{% endif %}">
                                             {{ message }}
                                         </li>
                                     {% endfor %}
@@ -40,8 +41,15 @@
                 </form>
             </div>
             <div class="return-link text-center mt-4">
-                <a style="color: #0b5ed7" href="{% url 'account:register-supervisor' %}">به عنوان مسئول سالن ورزشی ثبت نام کنید</a>
+                <a style="color: #0b5ed7" href="{% url 'account:register-supervisor' %}">به عنوان مسئول سالن ورزشی ثبت
+                    نام کنید</a>
             </div>
         </div>
+        <br>
+            {% for message in messages %}
+                <ul class="text-center">
+                    <li class="text-danger">{{ message }}</li>
+                </ul>
+            {% endfor %}
     </div>
 {% endblock %}
