@@ -10,7 +10,8 @@ from django.urls import reverse
 
 from account.models import User
 from .models import Complex, Session, Category
-# made by AmirTheEngineer https://t.me/AmirOmidi.Dev
+# made by AmirTheEngineer
+# https://t.me/AmirOmidi.Dev
 
 # Create your views here.
 def home(request):
